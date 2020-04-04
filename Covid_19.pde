@@ -41,5 +41,6 @@ void draw() {
     println("Total infected :", countInfected);
     println("Total recovered :", 1 - countHealthy-countInfected);
     sa.evokedFromPrimary(results);
+    timeCounter++;
   }
 }
