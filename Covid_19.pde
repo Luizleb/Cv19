@@ -2,6 +2,8 @@
 // Based on : 
 //
 //
+SecondApplet sa = new SecondApplet();
+ArrayList<PVector> results;
 
 // Main parameters
 float distLimit = 30;
@@ -11,6 +13,7 @@ int infectedPeriod = 10000;
 // Timer
 int timeLastCheck = millis();
 int timeInterval = 1500;
+float timeCounter = 0;
 
 System movers;
 
@@ -20,12 +23,9 @@ void settings() {
 }
 
 void setup() {
-  //size(1000, 1000);
-  //movers = new System(200);
+  results = new ArrayList<PVector>();
   String[] args = {"TwoFrameTest"};
-  SecondApplet sa = new SecondApplet();
   PApplet.runSketch(args, sa);
-  sa.evokedFromPrimary(500);
 }
 
 void draw() {
@@ -34,10 +34,12 @@ void draw() {
   movers.run();
   if (millis() > timeLastCheck + timeInterval ) {
     timeLastCheck = millis();
-    float countHealthy = float(movers.countHealthy())/float(movers.getSize());
+    float countHealthy = float(movers.countHealthy());
     float countInfected = float(movers.countInfected())/float(movers.getSize());
+    results.add(new PVector(timeCounter*10,countHealthy));
     println("Total healthy :", countHealthy);
     println("Total infected :", countInfected);
     println("Total recovered :", 1 - countHealthy-countInfected);
+    sa.evokedFromPrimary(results);
   }
 }
