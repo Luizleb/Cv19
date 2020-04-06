@@ -2,11 +2,13 @@
 public class SecondApplet extends PApplet {
 
   Float test;
-  ArrayList<PVector> points;
+  ArrayList<PVector> ptsInfected;
+  ArrayList<PVector> ptsHealthy;
 
   public void settings() {
-    size(800, 800);
-    points = new ArrayList<PVector>();
+    size(1200, 800);
+    ptsInfected = new ArrayList<PVector>();
+    ptsHealthy = new ArrayList<PVector>();
   }
 
   public void draw() {
@@ -14,21 +16,23 @@ public class SecondApplet extends PApplet {
     //fill(0,0,255);
     //textSize(20);
     //text("The number is : "+test,100,100);
-    displayShape(points);
+    stroke(255,0,0);
+    strokeWeight(3);
+    displayShape(ptsInfected);
+    stroke(0,255,0);
+    displayShape(ptsHealthy);
   }
 
   void displayShape(ArrayList<PVector> list) {
-    stroke(0);
-    fill(0, 0, 255);
     beginShape();
     for (int i=0; i<list.size(); i++) {
       vertex(list.get(i).x, list.get(i).y);
     }
-    vertex(list.get(list.size()-1).x,0);
     endShape();
   }
 
-  void evokedFromPrimary(ArrayList<PVector> list) {
-    points = list;
+  void evokedFromPrimary(ArrayList<PVector> list1, ArrayList<PVector> list2) {
+    ptsInfected = list1;
+    ptsHealthy = list2;
   }
 }
