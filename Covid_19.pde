@@ -7,9 +7,9 @@ ArrayList<PVector> ptsInfected;
 ArrayList<PVector> ptsHealthy;
 
 // Main parameters
-int totalPopulation  = 200;
-float distLimit = 30;
-float transmissionRate = 0.40;
+int totalPopulation  = 300;
+float distLimit = 40;
+float transmissionRate = 0.60;
 int infectedPeriod = 10000;
 
 // Timer
@@ -39,8 +39,8 @@ void draw() {
     timeLastCheck = millis();
     float countHealthy = float(movers.countHealthy());
     float countInfected = float(movers.countInfected());
-    ptsInfected.add(new PVector(timeCounter,sa.height-countInfected));
-    ptsHealthy.add(new PVector(timeCounter,sa.height-countHealthy));
+    ptsInfected.add(new PVector(timeCounter,sa.height-map(countInfected,0,totalPopulation,0,sa.height)));
+    ptsHealthy.add(new PVector(timeCounter,sa.height-map(countHealthy,0,totalPopulation,0,sa.height)));
     sa.evokedFromPrimary(ptsInfected,ptsHealthy);
     timeCounter++;
   }

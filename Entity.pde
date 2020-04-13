@@ -23,7 +23,7 @@ class Mover {
   }
 
   int setStatus() {
-    float threshold = 0.2 ;
+    float threshold = 0.05 ;
     if (random(1)>threshold) {
       return  0;
     } else {
